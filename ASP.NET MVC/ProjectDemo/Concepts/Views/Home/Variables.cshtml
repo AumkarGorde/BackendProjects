@@ -1,0 +1,60 @@
+﻿
+@{
+    ViewBag.Title = "Variables";
+}
+
+<div class="container">
+    <h2>Sample Page</h2>
+    <b>Session, TempData, ViewData, ViewBag examples</b> <br />
+    <i>Call Variables2 first and see the result and then again refresh the page and see the result.</i><br />
+    <i>Only Variable of same action and session varible will be present</i>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Sr No.</th>
+                <th scope="col">Item</th>
+                <th scope="col">Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>ViewData From Same Action</td>
+                <td>@ViewData["SampleTime"] </td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>ViewBag From Same Action</td>
+                <td>@ViewBag.SampleData</td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>TempData From Different Action</td>
+                <td>@TempData["TempDataEg"]</td>
+            </tr>
+            <tr>
+                <th scope="row">4</th>
+                <td>ViewData From Different Action</td>
+                <td>@ViewData["TempDataEg"]</td>
+            </tr>
+            <tr>
+                <th scope="row">5</th>
+                <td>Session Variable From Different Action</td>
+                <td>@Session["SessionVariable"]</td>
+            </tr>
+            <tr>
+                <th scope="row">6</th>
+                <td>TemData Variable From Different Action and call the keep method</td>
+                <td>
+                    @TempData["KeepValueEg"]
+                    @{ TempData.Keep("KeepValueEg");}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <br />
+    <img src="@Url.Content("App_Data/Images/TempData.jpg")" class="rounded mx-auto d-block">
+</div>
+
+
+

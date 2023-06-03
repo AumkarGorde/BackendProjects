@@ -1,0 +1,26 @@
+﻿@model List<Concepts.Models.Customer>
+@{
+    ViewBag.Title = "Load";
+}
+
+<h2>Customer Details</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Location</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var cus in Model)
+        {
+            <tr>
+                <th scope="row">@cus.CustomerId</th>
+                <td>@cus.CustomerName</td>
+                <td>@cus.CustomerLocation</td>
+            </tr>
+        }
+    </tbody>
+</table>
