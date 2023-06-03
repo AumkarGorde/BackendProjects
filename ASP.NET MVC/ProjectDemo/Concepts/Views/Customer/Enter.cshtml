@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "Enter";
+}
+
+<h2>Enter Customer Details</h2>
+
+<form action="Submit" method="post">
+    Customer Id       : <input name="CustomerId" "text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"> <br />
+    Customer Name     : <input name="CustomerName" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"> <br />
+    Customer Location : <input name="CustomerLocation" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"> <br />
+    <button type="submit" class="btn btn-success">Submit</button>
+</form>
+<br />
+<b>Submit by Model Binder</b><br />
+<form action="SubmitModelBinder" method="post">
+    Customer Id       : <input name="txtId" "text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"> <br />
+    Customer Name     : <input name="txtName" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"> <br />
+    Customer Location : <input name="txtLocation" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"> <br />
+    <button type="submit" class="btn btn-success">Submit</button>
+</form>
