@@ -1,21 +1,46 @@
-﻿
+﻿@model Concepts.Models.Customer
 @{
     ViewBag.Title = "Enter";
 }
-
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 <h2>Enter Customer Details</h2>
 
 <form action="Submit" method="post">
-    Customer Id       : <input name="CustomerId" "text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"> <br />
-    Customer Name     : <input name="CustomerName" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"> <br />
-    Customer Location : <input name="CustomerLocation" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"> <br />
+    Customer Id       : <input name="CustomerId" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" value="@Model.CustomerId"> <br />
+    @Html.ValidationMessageFor(_ => _.CustomerId)<br />
+    Customer Name     : <input name="CustomerName" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" value="@Model.CustomerName"> <br />
+    @Html.ValidationMessageFor(_ => _.CustomerName)<br />
+    Customer Location : <input name="CustomerLocation" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" value="@Model.CustomerLocation"> <br />
+    @Html.ValidationMessageFor(_ => _.CustomerLocation)<br />
     <button type="submit" class="btn btn-success">Submit</button>
 </form>
+@Html.ValidationSummary()
 <br />
-<b>Submit by Model Binder</b><br />
+<b>Submit by Model Binder</b>
+<br />
 <form action="SubmitModelBinder" method="post">
-    Customer Id       : <input name="txtId" "text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"> <br />
-    Customer Name     : <input name="txtName" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"> <br />
-    Customer Location : <input name="txtLocation" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"> <br />
+    Customer Id       : <input name="txtId" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" value="@Model.CustomerId"> <br />
+    @Html.ValidationMessageFor(_ => _.CustomerId)<br />
+    Customer Name     : <input name="txtName" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" value="@Model.CustomerName"> <br />
+    @Html.ValidationMessageFor(_ => _.CustomerName)<br />
+    Customer Location : <input name="txtLocation" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" value="@Model.CustomerLocation"> <br />
+    @Html.ValidationMessageFor(_ => _.CustomerLocation)<br />
     <button type="submit" class="btn btn-success">Submit</button>
 </form>
+@Html.ValidationSummary()
+<br />
+<b>Submit by Html Helper classes and use JQuery for Validations</b>
+<br />
+@using (Html.BeginForm("SubmitModelBinder", "Customer", FormMethod.Post))
+{
+    <p>Customer Id :</p> @Html.TextBoxFor(_ => _.CustomerId)<br />
+     @Html.ValidationMessageFor(_ => _.CustomerId)<br />
+    <p>Customer Name :</p> @Html.TextBoxFor(_ => _.CustomerName)<br />
+    @Html.ValidationMessageFor(_ => _.CustomerName)<br />
+    <p>Customer Location :</p> @Html.TextBoxFor(_ => _.CustomerLocation)<br />
+    @Html.ValidationMessageFor(_ => _.CustomerLocation)<br />
+    <button type="submit" class="btn btn-success">Submit</button>
+}
+@Html.ValidationSummary()
