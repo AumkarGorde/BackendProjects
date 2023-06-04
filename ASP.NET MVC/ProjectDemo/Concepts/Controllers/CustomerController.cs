@@ -13,10 +13,11 @@ namespace Concepts.Controllers
         public ActionResult Load()
         {
             List<Customer> cusList = new List<Customer>();
-            Customer cus = new Customer{
-                 CustomerId = 1,
-                 CustomerName = "Omkar Gorde",
-                 CustomerLocation = "India"
+            Customer cus = new Customer
+            {
+                CustomerId = 1,
+                CustomerName = "Omkar Gorde",
+                CustomerLocation = "India"
             };
             cusList.Add(cus);
             Customer cus1 = new Customer
@@ -31,26 +32,41 @@ namespace Concepts.Controllers
 
         public ActionResult Enter()
         {
-            return View();
+            return View("Enter",new Customer());
         }
 
         public ActionResult Submit(Customer cus)
         {
-            List<Customer> cusList = new List<Customer>();
-            //---We can use this and make Submit() without Parameter
-            //Customer cus = new Customer();
-            //cus.CustomerId = Convert.ToInt32(Request.Form["CustomerId"]);
-            //cus.CustomerName = Request.Form["CustomerName"];
-            //cus.CustomerLocation = Request.Form["CustomerLocation"];
-            cusList.Add(cus);
-            return View("Customer", cusList);
+            if (ModelState.IsValid)
+            {
+                List<Customer> cusList = new List<Customer>();
+                //---We can use this and make Submit() without Parameter
+                //Customer cus = new Customer();
+                //cus.CustomerId = Convert.ToInt32(Request.Form["CustomerId"]);
+                //cus.CustomerName = Request.Form["CustomerName"];
+                //cus.CustomerLocation = Request.Form["CustomerLocation"];
+                cusList.Add(cus);
+                return View("Customer", cusList);
+            }
+            else
+            {
+                return View("Enter",cus);
+            }
         }
 
-        public ActionResult SubmitModelBinder([ModelBinder(typeof(CustomerBinder))]Customer cus)
+        //Data Annotation does not work with Model Binders
+        public ActionResult SubmitModelBinder([ModelBinder(typeof(CustomerBinder))] Customer cus)
         {
-            List<Customer> cusList = new List<Customer>();
-            cusList.Add(cus);
-            return View("Customer", cusList);
+            if (ModelState.IsValid)
+            {
+                List<Customer> cusList = new List<Customer>();
+                cusList.Add(cus);
+                return View("Customer", cusList);
+            }
+            else
+            {
+                return View("Enter",cus);
+            }
         }
     }
 }

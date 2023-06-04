@@ -1,0 +1,26 @@
+﻿@model Concepts.Models.EmployeeViewModel
+
+@{
+    ViewBag.Title = "Show";
+}
+
+<h2>Employee Details</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Age</th>
+            <th scope="col">Salary</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">@Model._employee.Id</th>
+            <td>@Model._employee.Name</td>
+            <td>@Model.Age</td>
+            <td style="color:@Model.Salary">@Model._employee.Salary</td>
+        </tr>
+    </tbody>
+</table>

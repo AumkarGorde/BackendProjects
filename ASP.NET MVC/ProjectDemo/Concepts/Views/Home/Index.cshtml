@@ -7,7 +7,40 @@
 </div>
 
 <div class="container">
-    <div class="row">
-        Welocome to Home Page
-    </div>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Concepts</th>
+                <th scope="col">Examples</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>ViewData, TempData, ViewBag</td>
+                <td>@Html.ActionLink("Variables Example", "Variables2", "Home")</td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Load Data</td>
+                <td>@Html.ActionLink("Load Data Example", "Load", "Customer")</td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>Submit Action / Post Call / Model Binder</td>
+                <td>@Html.ActionLink("POST CALL Example", "Enter", "Customer")</td>
+            </tr>
+            <tr>
+                <th scope="row">4</th>
+                <td>Data Annotation</td>
+                <td>@Html.ActionLink("POST CALL Example", "Enter", "Customer")</td>
+            </tr>
+            <tr>
+                <th scope="row">4</th>
+                <td>View Model</td>
+                <td>@Html.ActionLink("View Model / Data Transform & Presentation Logic Example", "Show", "Employee")</td>
+            </tr>
+        </tbody>
+    </table>
 </div>
