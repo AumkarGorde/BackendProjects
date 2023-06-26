@@ -1,0 +1,80 @@
+﻿@model Concepts.Models.Customer
+
+@{
+    ViewBag.Title = "AjaxView";
+}
+
+<h2>AjaxView</h2>
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="~/Scripts/jquery.validate.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<b>This does a full post submit.</b>
+<form action="AjaxImplemtationEnter" method="post">
+    Customer Id       : <input name="CustomerId" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" value="@Model.CustomerId"> <br />
+    @Html.ValidationMessageFor(_ => _.CustomerId)<br />
+    Customer Name     : <input name="CustomerName" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" value="@Model.CustomerName"> <br />
+    @Html.ValidationMessageFor(_ => _.CustomerName)<br />
+    Customer Location : <input name="CustomerLocation" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" value="@Model.CustomerLocation"> <br />
+    @Html.ValidationMessageFor(_ => _.CustomerLocation)<br />
+    <button type="submit" class="btn btn-success">Submit</button>
+</form>
+</br>
+</br>
+<b>This is AJAX submit to submit necessary data.</b>
+<form id="frm1">
+    Customer Id       : <input id="cus_id" name="CustomerId" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" value="@Model.CustomerId"> <br />
+    @Html.ValidationMessageFor(_ => _.CustomerId)<br />
+    Customer Name     : <input id="cus_name" name="CustomerName" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" value="@Model.CustomerName"> <br />
+    @Html.ValidationMessageFor(_ => _.CustomerName)<br />
+    Customer Location : <input id="cus_location" name="CustomerLocation" type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" value="@Model.CustomerLocation"> <br />
+    @Html.ValidationMessageFor(_ => _.CustomerLocation)<br />
+</form>
+<input id="btn" type="button" class="btn btn-success" value="Add Customer" onclick="SendData()">
+<div id="statusId"></div>
+<table class="table table-bordered" id="tbl1">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Location</th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+<script language="javascript">
+    $("#statusId").text("Data is Loading");
+    $.get("GetCustomerFromDB", null, callbackfun);
+    function callbackfun(customers) {
+        var tableVariable = $("#tbl1"); //refrence oftable obj
+        emptyRows();
+        //for loop to fill table data
+        for (var i = 0; i < customers.length; i++) {
+            var row = "<tr>" +
+                "<td>" + customers[i].CustomerId + "</td>" +
+                "<td>" + customers[i].CustomerName + "</td>" +
+                "<td>" + customers[i].CustomerLocation + "</td>" +
+                "</tr>"
+            tableVariable.append(row)
+        }
+        $("#statusId").text("Loaded all Data");
+    }
+
+    function emptyRows() {
+        $("#tbl1 > tbody").empty();
+    }
+    function SendData() {
+
+        //post call to MVC controller
+        // 1. get refrence of form
+        // 2. seralize the data
+        // 3. call the post method
+        var frm = $("#frm1").serialize();
+        $.post("AjaxPostCall", frm, callbackfun); // here I want to do a callback to above get api call to get latest data
+        $("#statusId").text("Data is being added");
+        $("#cus_id").val("");
+        $("#cus_name").val("");
+        $("#cus_location").val("");
+    }
+</script>
