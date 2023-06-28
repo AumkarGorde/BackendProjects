@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace Concepts.Controllers
 {
+    [Authorize]
     public class EmployeeController : Controller
     {
         // GET: Employee

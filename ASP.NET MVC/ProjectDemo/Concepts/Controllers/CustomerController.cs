@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace Concepts.Controllers
 {
+    [Authorize]
     public class CustomerController : Controller
     {
         // GET: Customer
