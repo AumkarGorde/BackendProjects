@@ -1,0 +1,16 @@
+﻿@model Concepts.Models.UserDetails
+
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Login</h2>
+<form action="SubmitLogin" method="post">
+    UserName :
+    <input name="UserName" type="text" />
+    <br />
+    Password :
+    <input name="UserPassword" type="text" />
+    <br />
+    <button type="submit" class="btn btn-success">Submit</button>
+</form>
