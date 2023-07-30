@@ -40,7 +40,8 @@ namespace DapperApplicationAPI.DataAccess
                 throw;
             }
         }
-
+        // splitOn will split will split the output columns of query anything up to that column maps to the first parameter employee and after that to department
+        // 
         public IEnumerable<Employee> GetAllEmployeesWithDepartment()
         {
             IEnumerable<Employee> emp = new List<Employee>();
@@ -53,10 +54,13 @@ namespace DapperApplicationAPI.DataAccess
                                     SELECT e.*, d.DepartmentName
                                     FROM Employees e
                                     LEFT JOIN Departments d ON e.DepartmentId = d.DepartmentId";
+                    //query with 2  input types - employee and department. This returns a single output employee
                     emp = connection.Query<Employee, Department, Employee>(
                         query, (employee, department) =>
                         {
+                            // this runs for each row, we fill each employee object and return the same
                             employee.Department = department;
+                            employee.DepartmentId = department.DepartmentId;
                             return employee;
                         },
                         splitOn: "DepartmentId"

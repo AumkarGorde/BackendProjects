@@ -65,3 +65,16 @@ FROM #TempEmployeeProjects;
 
 -- Drop the temporary table
 DROP TABLE #TempEmployeeProjects;
+
+
+--Store Procedure
+GO
+CREATE PROCEDURE [dbo].[GetDepartmentByEmployeeName]
+    @EmployeeName NVARCHAR(100)
+AS
+BEGIN
+    SELECT d.DepartmentId, d.DepartmentName
+    FROM Departments d
+    JOIN Employees e ON d.DepartmentId = e.DepartmentId
+    WHERE e.EmployeeName = @EmployeeName;
+END
