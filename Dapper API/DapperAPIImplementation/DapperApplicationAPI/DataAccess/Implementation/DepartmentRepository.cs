@@ -41,7 +41,7 @@ namespace DapperApplicationAPI.DataAccess
                 throw;
             }
         }
-
+        //https://www.learndapper.com/relationships
         public IEnumerable<Department> GetAllDepartmentsWithEmployees()
         {
             IEnumerable<Department> emp = new List<Department>();
@@ -51,18 +51,29 @@ namespace DapperApplicationAPI.DataAccess
                 {
                     connection.Open();
                     var query = @"
-                                    SELECT d.*, e.*
-                                    FROM Departments d
-                                    LEFT JOIN Employees e ON d.DepartmentId = e.DepartmentId";
+        SELECT d.DepartmentId, d.DepartmentName, e.EmployeeId, e.EmployeeName
+            FROM Departments d
+            LEFT JOIN Employees e ON d.DepartmentId = e.DepartmentId";
+
+                    var departmentDictionary = new Dictionary<int, Department>();
                     emp = connection.Query<Department, Employee, Department>(
-                          query, (department, employee)=> 
-                          {
-                              department.Employees = department.Employees ?? new List<Employee>(); //null check
-                              department.Employees.Add(employee);
-                              return department;
-                          },
-                          splitOn: "EmployeeId"
-                    );
+                        query,
+                        (department, employee) =>
+                        {
+                            if (!departmentDictionary.TryGetValue(department.DepartmentId, out var currentDepartment))
+                            {
+                                currentDepartment = department;
+                                currentDepartment.Employees = new List<Employee>();
+                                departmentDictionary.Add(currentDepartment.DepartmentId, currentDepartment);
+                            }
+
+                            if (employee != null)
+                                currentDepartment.Employees.Add(employee);
+
+                            return currentDepartment;
+                        },
+                        splitOn: "EmployeeId"
+                    ).Distinct();
                     connection.Close();
                 }
                 return emp;
