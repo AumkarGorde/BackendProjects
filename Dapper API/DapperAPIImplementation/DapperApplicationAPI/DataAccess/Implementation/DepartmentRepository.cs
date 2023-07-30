@@ -51,17 +51,18 @@ namespace DapperApplicationAPI.DataAccess
                 {
                     connection.Open();
                     var query = @"
-        SELECT d.DepartmentId, d.DepartmentName, e.EmployeeId, e.EmployeeName
-            FROM Departments d
-            LEFT JOIN Employees e ON d.DepartmentId = e.DepartmentId";
+                                SELECT d.DepartmentId, d.DepartmentName, e.EmployeeId, e.EmployeeName
+                                FROM Departments d
+                                LEFT JOIN Employees e ON d.DepartmentId = e.DepartmentId";
 
                     var departmentDictionary = new Dictionary<int, Department>();
                     emp = connection.Query<Department, Employee, Department>(
                         query,
                         (department, employee) =>
                         {
-                            if (!departmentDictionary.TryGetValue(department.DepartmentId, out var currentDepartment))
+                            if (!departmentDictionary.TryGetValue(department.DepartmentId, out var currentDepartment)) 
                             {
+                                // The above condition checks if value is there if not there then initalize Employees list and add to dictionary
                                 currentDepartment = department;
                                 currentDepartment.Employees = new List<Employee>();
                                 departmentDictionary.Add(currentDepartment.DepartmentId, currentDepartment);
