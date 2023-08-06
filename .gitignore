@@ -23,3 +23,6 @@
 /Dapper API/DapperAPIImplementation/.vs/DapperAPIImplementation
 /Dapper API/DapperAPIImplementation/DapperApplicationAPI/bin/Debug/netcoreapp3.1
 /Dapper API/DapperAPIImplementation/DapperApplicationAPI/obj
+/EFCore Code First Approach/CodeFirstApproach/.vs/CodeFirstApproach
+/EFCore Code First Approach/CodeFirstApproach/OnlineStoreApplication/bin/Debug/netcoreapp3.1
+/EFCore Code First Approach/CodeFirstApproach/OnlineStoreApplication/obj
