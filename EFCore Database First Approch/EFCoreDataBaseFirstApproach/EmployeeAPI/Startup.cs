@@ -29,6 +29,7 @@ namespace EmployeeAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            SwaggerService.Register(services);
             services.AddScoped<IEmployeeService, EmployeeService>();
             services.AddDbContext<EmployeeAPIDbContext>(options =>
             {
@@ -43,6 +44,18 @@ namespace EmployeeAPI
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseSwagger(c =>
+            {
+                c.SerializeAsV2 = true;
+            });
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Dapper API");
+                //To serve the Swagger UI at the app's root
+                c.RoutePrefix = string.Empty;
+            });
 
             app.UseHttpsRedirection();
 

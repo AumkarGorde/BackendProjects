@@ -20,5 +20,8 @@ namespace EmployeeAPI.Models
 
         public virtual Departments Department { get; set; }
         public virtual ICollection<EmployeeProjects> EmployeeProjects { get; set; }
+        public int? EmployeeDetailsId { get; set; } // New property
+        public EmployeeDetails EmployeeDetails { get; set; } // Navigation property
     }
 }
+
