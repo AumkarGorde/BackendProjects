@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace OnlineStoreApplication.Entities
 {
-    public class OrderProductMappings
+    public class OrderProductMapping
     {
         public int OrderProductMappingID { get; set; } // Unique identifier for each order item.
         public int OrderID { get; set; } // References the order to which the item belongs

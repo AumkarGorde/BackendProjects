@@ -13,7 +13,7 @@ namespace OnlineStoreApplication.Entities
         public int CustomerID { get; set; } //It is a foreign key property that references the primary key (CustomerID) of the Customer entity.
         public Customer Customer { get; set; } //  navigation property - each order is placed by a single customer
 
-        public ICollection<OrderProductMappings> OrderItems { get; set; } // one-to-many relationship, where an order can have multiple order items i.e prodducts.
+        public ICollection<OrderProductMapping> OrderItems { get; set; } // one-to-many relationship, where an order can have multiple order items i.e prodducts.
     }
 
 }

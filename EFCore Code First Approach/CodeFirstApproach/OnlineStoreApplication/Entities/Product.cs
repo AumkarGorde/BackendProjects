@@ -12,7 +12,7 @@ namespace OnlineStoreApplication.Entities
         public string Description { get; set; } //A brief description of the product.
         public decimal Price { get; set; } //The price of the product.
         public ICollection<ProductCategory> ProductCategories { get; set; } // many-to-many relationship - one product can be in 2 categories. Eg: "Laptop" product might belong to both the "Electronics" and "Computers" categories
-        public ICollection<OrderProductMappings> OrderProductMappings { get; set; } // one product can be multple orders - one-to-many
+        public ICollection<OrderProductMapping> OrderProductMappings { get; set; } // one product can be multple orders - one-to-many
     }
 
 }
