@@ -6,6 +6,10 @@ using Microsoft.EntityFrameworkCore.Metadata;
 // If you have enabled NRTs for your project, then un-comment the following line:
 // #nullable disable
 
+// command used to scaffold -
+// dotnet ef dbcontext scaffold "Server=<your-server>;Database=<your-database>;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -o Models
+
+
 namespace EmployeeAPI.Models
 {
     public partial class EmployeeAPIDbContext : DbContext
@@ -23,6 +27,8 @@ namespace EmployeeAPI.Models
         public virtual DbSet<EmployeeProjects> EmployeeProjects { get; set; }
         public virtual DbSet<Employees> Employees { get; set; }
         public virtual DbSet<Projects> Projects { get; set; }
+        public DbSet<EmployeeDetails> EmployeeDetails { get; set; } // New DbSet
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -34,6 +40,7 @@ namespace EmployeeAPI.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
             modelBuilder.Entity<Departments>(entity =>
             {
                 entity.HasKey(e => e.DepartmentId)
@@ -71,6 +78,12 @@ namespace EmployeeAPI.Models
                     .WithMany(p => p.Employees)
                     .HasForeignKey(d => d.DepartmentId)
                     .HasConstraintName("FK__Employees__Depar__286302EC");
+
+                // This is maually added after making changes to DB.
+                entity.HasOne(d => d.EmployeeDetails) // Navigation property
+                .WithOne() // In a one-to-one relationship
+                .HasForeignKey<Employees>(d => d.EmployeeDetailsId) // Foreign key property
+                .HasConstraintName("FK__Employees__EmployeeDetailsId__manual1");
             });
 
             modelBuilder.Entity<Projects>(entity =>
@@ -79,6 +92,13 @@ namespace EmployeeAPI.Models
                     .HasName("PK__Projects__761ABEF0803DC172");
 
                 entity.Property(e => e.ProjectName).HasMaxLength(100);
+            });
+
+            modelBuilder.Entity<EmployeeDetails>(entity =>
+            {
+                entity.HasKey(ed => ed.EmployeeId);
+                entity.Property(ed => ed.Address).HasMaxLength(200);
+                entity.Property(ed => ed.PhoneNumber).HasMaxLength(20);
             });
 
             OnModelCreatingPartial(modelBuilder);
