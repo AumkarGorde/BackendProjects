@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,12 +9,16 @@ namespace OnlineStoreApplication.Entities
 {
     public class Customer
     {
-        public int CustomerID { get; set; } //Unique identifier for each customer.
+        [Key]
+        public Guid CustomerID { get; set; } //Unique identifier for each customer.
         public string FirstName { get; set; } //First name of the customer.
         public string LastName { get; set; } //Last name of the customer.
         public string Email { get; set; } //Email address of the customer.
         public string Phone { get; set; } //Phone number of the customer.
-        public int AddressID { get; set; } // foreign key property linking address table.
+        public string UserName { get; set; }
+        public string Password { get; set; }
+        public string Role { get; set; }
+        public Guid ?AddressID { get; set; }
         public Address Address { get; set; } // one-to-one mapping with customer table.
         public ICollection<Order> Orders { get; set; } //navigation property represents a one-to-many relationship between the Customer entity and the Order entity.
     }
